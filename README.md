@@ -1,0 +1,20 @@
+<en>
+<![CDATA[A script that changes the global diesel price to an amount close to Polish reality, approximately 6,80 PLN per liter (without the artificial Euro conversion rate). 
+Note: the price may fluctuate between 6 PLN and 8 PLN per liter, and buying in a fuel tank is more expensive than at a gas station. 
+The modification fully supports multiplayer mode.]]>
+        </en>
+        <de>
+<![CDATA[Ein Skript, das den globalen Dieselpreis an die polnische Realität anpasst, auf etwa 6,80 PLN pro Liter (ohne den künstlichen Euro-Umrechnungskurs). 
+Hinweis: Der Preis kann zwischen 6 PLN und 8 PLN pro Liter schwanken, und der Kauf in einem Kraftstofftank ist teurer als an der Tankstelle. 
+Die Modifikation unterstützt den Multiplayer-Modus vollständig.]]>
+        </de>
+        <fr>
+<![CDATA[Un script qui modifie le prix global du diesel pour un montant proche de la réalité polonaise, environ 6,80 PLN par litre (sans le taux de conversion artificiel de l'Euro). 
+Remarque : le prix peut fluctuer entre 6 PLN et 8 PLN par litre, et l'achat dans une cuve de carburant est plus cher qu'à la station-service. 
+La modification prend entièrement en charge le mode multijoueur.]]>
+</fr>
+        <pl>
+<![CDATA[Skrypt, który zmienia globalną cenę diesla na zbliżoną do polskiej rzeczywistości kwotę około 6,80 zł za litr (bez sztucznego przelicznika z Euro). 
+Uwaga: cena może się wahać od 6 zł do 8 zł za litr, a zakup w zbiorniku paliwa jest droższy niż na stacji paliw. 
+Modyfikacja w pełni obsługuje tryb multiplayer.]]>
+        </pl>
