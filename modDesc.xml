@@ -29,7 +29,7 @@ Modyfikacja w pełni obsługuje tryb multiplayer.]]></pl>
     <iconFilename>icon_RealisticPolishDieselPrice.dds</iconFilename>
 
     <extraSourceFiles>
-        <sourceFile filename="RealisticDieselPrice.lua" />
+        <sourceFile filename="src/RealisticDieselPrice.lua" />
     </extraSourceFiles>
 
 </modDesc>
