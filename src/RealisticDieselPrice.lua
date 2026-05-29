@@ -1,11 +1,12 @@
---[[
+--[[ RealisticDieselPrice.lua change diesel price
 
 Author:     KryskiPL (https://github.com/KryskiPL)
 Version:    v1.0.0.0
 
 Changelog:
     v1.0.0.0  - Publish FS25
-]]
+]]--
+
 RealisticDieselPrice = {}
 function RealisticDieselPrice:loadMap(name)
     local dieselType = g_fillTypeManager:getFillTypeByName("DIESEL")
