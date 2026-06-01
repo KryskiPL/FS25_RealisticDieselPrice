@@ -11,17 +11,17 @@
     </title>
 
     <description>
-        <en><![CDATA[A script that changes the global diesel price to an amount close to Polish reality, approximately 6.30 Euro per liter (without the conversion rate). Note: the price may fluctuate between 6 Euro and 8 Euro per liter, and buying in a fuel tank is more expensive than at a gas station. The modification supports multiplayer mode.]]></en>
-        <de><![CDATA[Ein Skript, das den globalen Dieselpreis an die polnische Realität anpasst, auf etwa 6,30 Euro pro Liter (ohne Umrechnungskurs). Hinweis: Der Preis kann zwischen 6 Euro und 8 Euro pro Liter schwanken, und der Kauf in einem Kraftstofftank ist teurer als an der Tankstelle. Die Modifikation unterstützt den Multiplayer-Modus.]]></de>
-        <fr><![CDATA[Un script qui modifie le prix global du diesel pour un montant proche de la réalité polonaise, environ 6,30 Euro par litre (sans taux de conversion). Remarque : le prix peut fluctuer entre 6 Euro et 8 Euro par litre, et l'achat dans une cuve de carburant est plus cher qu'à la station-service. La modification prend en charge le mode multijoueur.]]></fr>
-        <pl><![CDATA[Skrypt, który zmienia globalną cenę diesla na zbliżoną do polskiej rzeczywistości kwotę około 6,30 euro za litr (bez przelicznika). Uwaga: cena może się wahać od 6 zł do 8 zł za litr, a zakup w zbiorniku paliwa jest droższy niż na stacji paliw. Modyfikacja obsługuje tryb multiplayer.]]></pl>
+        <en><![CDATA[This script changes the global diesel price to an amount close to Polish reality, setting it to approximately 6.30 Euro per liter (without the conversion rate). How to use: The script works automatically in the background after activating the mod. There are no hotkeys required. Important information: The dynamic economy means the price may fluctuate between 6 and 7 euros per liter. Buying fuel from a placeable farm tank is more expensive than at a public gas station. The modification supports multiplayer mode. Github: https://github.com/KryskiPL/FS25_RealisticPolishDieselPrice]]></en>
+        <de><![CDATA[Dieses Skript ändert den globalen Dieselpreis auf einen Betrag nahe der polnischen Realität und setzt ihn auf etwa 6,30 Euro pro Liter (ohne den Umrechnungskurs). Verwendung: Das Skript arbeitet nach der Aktivierung des Mods automatisch im Hintergrund. Es werden keine Tastenbelegungen benötigt. Wichtige Informationen: Die dynamische Wirtschaft führt dazu, dass der Preis zwischen 6 und 7 Euro pro Liter schwanken kann. Der Kauf von Kraftstoff in einem Hoftank ist teurer als an einer öffentlichen Tankstelle. Die Modifikation unterstützt den Multiplayer-Modus. Github: https://github.com/KryskiPL/FS25_RealisticPolishDieselPrice]]></de>
+        <fr><![CDATA[Ce script modifie le prix global du diesel pour un montant proche de la réalité polonaise, en le fixant à environ 6,30 Euro par litre (sans le taux de conversion). Utilisation : Le script fonctionne automatiquement en arrière-plan après l'activation du mod. Aucun raccourci clavier n'est requis. Informations importantes : L'économie dynamique fait que le prix peut fluctuer entre 6 et 7 euros par litre. L'achat de carburant dans une cuve de ferme est plus cher qu'à une station-service publique. La modification prend en charge le mode multijoueur. Github: https://github.com/KryskiPL/FS25_RealisticPolishDieselPrice]]></fr>
+        <pl><![CDATA[Skrypt zmienia globalną cenę diesla na kwotę zbliżoną do polskiej rzeczywistości, ustawiając ją na około 6,30 euro za litr (bez przelicznika). Jak używać: Skrypt działa automatycznie w tle po aktywacji modyfikacji. Mod nie wymaga żadnych skrótów klawiszowych. Ważne informacje: Dynamiczna ekonomia sprawia, że cena może się wahać od 6 do 7 euro za litr. Zakup paliwa w stacjonarnym zbiorniku na farmie jest droższy niż na publicznej stacji paliw. Modyfikacja obsługuje tryb wieloosobowy. Github: https://github.com/KryskiPL/FS25_RealisticPolishDieselPrice]]></pl>
     </description>
 
     <multiplayer supported="true"/>
     <iconFilename>icon_RealisticPolishDieselPrice.dds</iconFilename>
 
     <extraSourceFiles>
-        <sourceFile filename="src/RealisticDieselPrice.lua" />
+        <sourceFile filename="RealisticPolishDieselPrice.lua" />
     </extraSourceFiles>
 
 </modDesc>
