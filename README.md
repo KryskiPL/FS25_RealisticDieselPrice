@@ -1,4 +1,4 @@
-# FS25_RealisticPolishDieselPrice
+# Realistic Polish Diesel Price
 
 Skrypt, który zmienia globalną cenę diesla na zbliżoną do polskiej rzeczywistości kwotę około 6,80 zł za litr (bez przelicznika z Euro).
 
