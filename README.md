@@ -1,9 +1,12 @@
 # Realistic Polish Diesel Price
 
-Skrypt, który zmienia globalną cenę diesla na zbliżoną do polskiej rzeczywistości kwotę około 6,80 zł za litr (bez przelicznika z Euro).
+Skrypt dodaje nowe menu w ustawieniach, pozwalające na zmianę globalnej ceny diesla w oparciu o prawdziwe kraje (Polska, Niemcy, Francja). 
+Jak używać: Przejdź do ogólnych ustawień gry, znajdź sekcję "Realistic Diesel Price" i wybierz preferowany region. 
+- Zmiany są wprowadzane natychmiast. 
+- Zakup paliwa w stacjonarnym zbiorniku jest droższy niż na publicznej stacji paliw. 
+- Modyfikacja obsługuje tryb wieloosobowy.
 
-- Zakup w zbiorniku paliwa jest droższy niż na stacji paliw. 
-- Modyfikacja obsługuje tryb multiplayer.
+- Zakaz reuploudu modu na inne strony.
 
 # Pobieranie
 
