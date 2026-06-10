@@ -16,25 +16,25 @@ How to use: Go to the general game settings, find the "Realistic Diesel Price" s
 Changes apply immediately. 
 Buying fuel from a placeable tank is more expensive than at a public gas station. 
 The modification supports multiplayer mode. 
-Github: https://github.com/KryskiPL/FS25_RealisticPolishDieselPrice]]></en>
+Github: https://github.com/KryskiPL/FS25_RealisticDieselPrice]]></en>
         <de><![CDATA[Dieses Skript fügt ein neues Einstellungsmenü hinzu, um den globalen Dieselpreis basierend auf realen Ländern (Polen, Deutschland, Frankreich) zu ändern. 
 Verwendung: Gehe zu den allgemeinen Spieleinstellungen, finde den Abschnitt "Realistic Diesel Price" und wähle deine bevorzugte Region aus. 
 Änderungen werden sofort übernommen. 
 Der Kauf von Kraftstoff in einem platzierbaren Tank ist teurer als an einer öffentlichen Tankstelle. 
 Die Modifikation unterstützt den Multiplayer-Modus. 
-Github: https://github.com/KryskiPL/FS25_RealisticPolishDieselPrice]]></de>
+Github: https://github.com/KryskiPL/FS25_RealisticDieselPrice]]></de>
         <fr><![CDATA[Ce script ajoute un nouveau menu de paramètres pour modifier le prix global du diesel en fonction de pays réels (Pologne, Allemagne, France). 
 Utilisation : Allez dans les paramètres généraux du jeu, trouvez la section "Realistic Diesel Price" et choisissez votre région préférée. 
 Les modifications s'appliquent immédiatement. 
 L'achat de carburant dans une cuve plaçable est plus cher qu'à une station-service publique. 
 La modification prend en charge le mode multijoueur. 
-Github: https://github.com/KryskiPL/FS25_RealisticPolishDieselPrice]]></fr>
+Github: https://github.com/KryskiPL/FS25_RealisticDieselPrice]]></fr>
         <pl><![CDATA[Skrypt dodaje nowe menu w ustawieniach, pozwalające na zmianę globalnej ceny diesla w oparciu o prawdziwe kraje (Polska, Niemcy, Francja). 
 Jak używać: Przejdź do ogólnych ustawień gry, znajdź sekcję "Realistic Diesel Price" i wybierz preferowany region. 
 Zmiany są wprowadzane natychmiast. 
 Zakup paliwa w stacjonarnym zbiorniku jest droższy niż na publicznej stacji paliw. 
 Modyfikacja obsługuje tryb wieloosobowy. 
-Github: https://github.com/KryskiPL/FS25_RealisticPolishDieselPrice]]></pl>
+Github: https://github.com/KryskiPL/FS25_RealisticDieselPrice]]></pl>
     </description>
 
     <multiplayer supported="true"/>
