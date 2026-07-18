@@ -1,7 +1,7 @@
 --[[ RealisticDieselPrice.lua
 
 Author:     KryskiPL (https://github.com/KryskiPL)
-Version:    v1.1.0.0
+Version:    v2.1.2.0
 
 ]]--
 RealisticDieselPrice = {}
@@ -13,53 +13,53 @@ rdp.regions = {
     {
         name = "Europe",
         countries = {
-            {label = "Poland PLN (6.65 Euro/L)", price = 6.65},
-            {label = "Poland Euro (1.55 Euro/L)", price = 1.55},
-            {label = "Lithuania (1.79 Euro/L)", price = 1.79},
-            {label = "Latvia (1.72 Euro/L)", price = 1.72},
-            {label = "Estonia (1.66 Euro/L)", price = 1.66},
-            {label = "Czechia (1.53 Euro/L)", price = 1.53},
-            {label = "Austria (1.80 Euro/L)", price = 1.80},
-            {label = "Croatia (1.55 Euro/L)", price = 1.55},
-            {label = "Slovakia (1.55 Euro/L)", price = 1.55},
-            {label = "Hungary (1.79 Euro/L)", price = 1.79},
-            {label = "Romania (1.82 Euro/L)", price = 1.82},
-            {label = "Germany (1.90 Euro/L)", price = 1.90},
-            {label = "United Kingdom (1.96 Euro/L)", price = 1.96},
-            {label = "Ireland (1.85 Euro/L)", price = 1.85},
-            {label = "Netherlands (2.15 Euro/L)", price = 2.15},
-            {label = "Belgium (1.95 Euro/L)", price = 1.95},
-            {label = "France (1.95 Euro/L)", price = 1.95},
-            {label = "Italy (2.00 Euro/L)", price = 2.00},
-            {label = "Spain (1.57 Euro/L)", price = 1.57},
-            {label = "Switzerland (2.25 Euro/L)", price = 2.25},
-            {label = "Portugal (1.90 Euro/L)", price = 1.90},
-            {label = "Denmark (2.07 Euro/L)", price = 2.07},
-            {label = "Norway (1.61 Euro/L)", price = 1.61},
-            {label = "Sweden (1.65 Euro/L)", price = 1.65},
-            {label = "Finland (2.20 Euro/L)", price = 2.20},
-            {label = "Belarus (0.80 Euro/L)", price = 0.80},
-            {label = "Ukraine (1.53 Euro/L)", price = 1.53}
+            {label = "Poland", price = 1.67},
+            {label = "Poland Hard", price = 7.25},
+            {label = "Lithuania", price = 1.79},
+            {label = "Latvia", price = 1.72},
+            {label = "Estonia", price = 1.66},
+            {label = "Czechia", price = 1.53},
+            {label = "Austria", price = 1.80},
+            {label = "Croatia", price = 1.55},
+            {label = "Slovakia", price = 1.55},
+            {label = "Hungary", price = 1.79},
+            {label = "Romania", price = 1.82},
+            {label = "Germany", price = 1.90},
+            {label = "United Kingdom", price = 1.96},
+            {label = "Ireland", price = 1.85},
+            {label = "Netherlands", price = 2.15},
+            {label = "Belgium", price = 1.95},
+            {label = "France", price = 1.95},
+            {label = "Italy", price = 2.00},
+            {label = "Spain", price = 1.57},
+            {label = "Switzerland", price = 2.25},
+            {label = "Portugal", price = 1.90},
+            {label = "Denmark", price = 2.07},
+            {label = "Norway", price = 1.61},
+            {label = "Sweden", price = 1.65},
+            {label = "Finland", price = 2.20},
+            {label = "Belarus", price = 0.80},
+            {label = "Ukraine", price = 1.53}
         }
     },
     {
         name = "Americas & Australia",
         countries = {
-            {label = "Brazil (1.14 Euro/L)", price = 1.14},
-            {label = "Argentina (1.30 Euro/L)", price = 1.30},
-            {label = "USA (1.08 Euro/L)", price = 1.08},
-            {label = "Canada (1.16 Euro/L)", price = 1.16},
-            {label = "Australia (1.09 Euro/L)", price = 1.09}
+            {label = "Brazil", price = 1.14},
+            {label = "Argentina", price = 1.30},
+            {label = "USA", price = 1.08},
+            {label = "Canada", price = 1.16},
+            {label = "Australia", price = 1.09}
         }
     },
     {
         name = "Asia",
         countries = {
-            {label = "Russia (0.90 Euro/L)", price = 0.90},
-            {label = "Kazakhstan (0.62 Euro/L)", price = 0.62},
-            {label = "Mongolia (1.52 Euro/L)", price = 1.52},
-            {label = "China (0.98 Euro/L)", price = 0.98},
-            {label = "Japan (0.86 Euro/L)", price = 0.86}
+            {label = "Russia", price = 0.90},
+            {label = "Kazakhstan", price = 0.62},
+            {label = "Mongolia", price = 1.52},
+            {label = "China", price = 0.98},
+            {label = "Japan", price = 0.86}
         }
     }
 }
@@ -67,16 +67,13 @@ rdp.currentRegion = 1
 rdp.currentCountry = 1
 rdp.menuInstalled = false
 rdp.menuControls = {}
-
 local function loadSettings()
     createFolder(rdp.settingsDirectory)
     if not fileExists(rdp.settingsFile) then return end
     local xmlFile = XMLFile.loadIfExists("rdpSettingsXML", rdp.settingsFile)
     if xmlFile == nil then return end
-    
     local savedRegion = xmlFile:getInt("settings#regionState")
     local savedCountry = xmlFile:getInt("settings#countryState")
-    
     if savedRegion ~= nil and rdp.regions[savedRegion] ~= nil then
         rdp.currentRegion = savedRegion
     end
@@ -85,7 +82,6 @@ local function loadSettings()
     else
         rdp.currentCountry = 1
     end
-    
     xmlFile:delete()
 end
 
@@ -104,7 +100,6 @@ function rdp.applyCurrentPrice()
     if regionData == nil then return end
     local countryData = regionData.countries[rdp.currentCountry]
     if countryData == nil then return end
-
     if g_fillTypeManager ~= nil then
         local dieselType = g_fillTypeManager:getFillTypeByName("DIESEL")
         if dieselType ~= nil then
@@ -136,7 +131,18 @@ local function getCountryTexts(regionIndex)
     local region = rdp.regions[regionIndex]
     if region ~= nil then
         for index, country in ipairs(region.countries) do
-            texts[index] = country.label
+            local convertedPrice = country.price
+            local symbol = "€"
+            if g_i18n ~= nil and g_i18n.getCurrencyFactor ~= nil and g_i18n.getCurrencySymbol ~= nil then
+                symbol = g_i18n:getCurrencySymbol(true)
+                symbol = string.gsub(symbol, "^%s*(.-)%s*$", "%1")
+                if symbol == "$" or symbol == "£" then
+                    convertedPrice = country.price * g_i18n:getCurrencyFactor()
+                else
+                    convertedPrice = country.price
+                end
+            end
+            texts[index] = string.format("%s (%.2f %s/L)", country.label, convertedPrice, symbol)
         end
     end
     return texts
@@ -185,6 +191,7 @@ local function addMenuOptions(settingsPage, settingsLayout)
     assignFocusIds(countryBox)
     table.insert(settingsPage.controlsList, countryBox)
     rdp.menuControls.countrySelection = countryOption
+    
     return true
 end
 
@@ -227,7 +234,6 @@ function rdp.installMenuIfPossible()
     if settingsPage.controlsList == nil then
         settingsPage.controlsList = {}
     end
-    
     local sectionTitle = nil
     for _, element in ipairs(settingsLayout.elements) do
         if element.name == "sectionHeader" and element.clone ~= nil then
@@ -241,11 +247,8 @@ function rdp.installMenuIfPossible()
         table.insert(settingsPage.controlsList, sectionTitle)
         rdp.menuControls.sectionTitle = sectionTitle
     end
-    
     if not addMenuOptions(settingsPage, settingsLayout) then return end
-    
     settingsLayout:invalidateLayout()
-    
     if InGameMenuSettingsFrame ~= nil and InGameMenuSettingsFrame.onFrameOpen ~= nil and InGameMenuSettingsFrame._rdpMenuHook ~= true then
         InGameMenuSettingsFrame.onFrameOpen = Utils.appendedFunction(InGameMenuSettingsFrame.onFrameOpen, function()
             rdp.refreshMenuStates()

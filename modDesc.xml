@@ -8,19 +8,18 @@
         <de>Realistischer Dieselpreis</de>
         <fr>Prix Réaliste Du Diesel</fr>
         <pl>Realistyczne Ceny Diesla</pl>
-        <es>Precio Realista Del Diésel</es>
     </title>
 
     <description>
-        <en><![CDATA[This script adds an advanced settings menu allowing you to change the global diesel price based on real-world countries. Over 35 countries have been divided into categories. 
-How to use: Go to the general game settings, find the "Realistic Diesel Price" section, first choose a region, and then select your preferred country. Changes apply immediately. Buying fuel from a placeable tank is more expensive than at a gas station. Supports multiplayer mode. 
-Github: https://github.com/KryskiPL/FS25_RealisticDieselPrice 
+<en><![CDATA[This script adds a menu allowing you to change the diesel price based on real-world countries. Over 35 countries in categories. 
+How to use: Go to the game settings, find "Realistic Diesel Price", choose a region, and then select a country. Changes apply immediately.
+Buying fuel from a placeable tank is more expensive than at a gas station. Supports multiplayer mode. 
 
-Available countries and prices (Euro/L):
+Available countries and prices:
 
 Europe:
-- Poland PLN: 6.65
-- Poland Euro: 1.55
+- Poland: 1.67
+- Poland Hard: 7.25
 - Lithuania: 1.79
 - Latvia: 1.72
 - Estonia: 1.66
@@ -31,7 +30,7 @@ Europe:
 - Hungary: 1.79
 - Romania: 1.82
 - Germany: 1.90
-- United Kingdom: 1.96
+- UK: 1.96
 - Ireland: 1.85
 - Netherlands: 2.15
 - Belgium: 1.95
@@ -61,20 +60,20 @@ Asia:
 - China: 0.98
 - Japan: 0.86
 
-Changelog: 2.1.0.0:
-- Added a dynamic, two-step selection menu (Region selection -> Country selection).
-- Added 33 new countries and their fuel prices.
-- Updated all fuel prices as of 06.07.2026.]]></en>
-
-        <de><![CDATA[Dieses Skript fügt ein Einstellungsmenü hinzu, um den Dieselpreis basierend auf realen Ländern zu ändern. Über 35 Länder in Kategorien unterteilt. 
-Verwendung: Gehe zu den Spieleinstellungen, finde "Realistic Diesel Price", wähle eine Region und dann dein Land. Änderungen werden sofort übernommen. Kraftstoff im Hoftank ist teurer als an der Tankstelle. Unterstützt Multiplayer. 
 Github: https://github.com/KryskiPL/FS25_RealisticDieselPrice 
 
-Verfügbare Länder und Preise (Euro/L):
+Changelog: 2.1.0.0:
+- Added a region selection menu.
+- Added 33 new countries and their fuel prices.]]></en>
+<de><![CDATA[Dieses Skript fügt ein Menü hinzu, um den Dieselpreis basierend auf realen Ländern zu ändern. Über 35 Länder in Kategorien. 
+Verwendung: Gehe zu den Spieleinstellungen, finde "Realistic Diesel Price", wähle eine Region und dann ein Land. Änderungen werden sofort übernommen.
+Kraftstoff im Hoftank ist teurer als an der Tankstelle. Unterstützt Multiplayer. 
+
+Verfügbare Länder und Preise:
 
 Europa:
-- Polen PLN: 6.65
-- Polen Euro: 1.55
+- Polen: 1.67
+- Polen Hard: 7.25
 - Litauen: 1.79
 - Lettland: 1.72
 - Estland: 1.66
@@ -115,20 +114,20 @@ Asien:
 - China: 0.98
 - Japan: 0.86
 
-Changelog: 2.1.0.0:
-- Ein dynamisches, zweistufiges Auswahlmenü wurde hinzugefügt (Region -> Land).
-- 33 neue Länder und deren Kraftstoffpreise hinzugefügt.
-- Alle Kraftstoffpreise auf den Stand vom 06.07.2026 aktualisiert.]]></de>
-
-        <fr><![CDATA[Ce script ajoute un menu permettant de modifier le prix du diesel en fonction de pays réels. Plus de 35 pays répartis en catégories. 
-Utilisation : Allez dans les paramètres du jeu, trouvez "Realistic Diesel Price", choisissez une région puis un pays. Les modifications s'appliquent immédiatement. L'achat en cuve est plus cher qu'en station. Compatible multijoueur. 
 Github: https://github.com/KryskiPL/FS25_RealisticDieselPrice 
 
-Pays disponibles et prix (Euro/L) :
+Changelog: 2.1.0.0:
+- Ein Menü zur Regionsauswahl wurde hinzugefügt.
+- 33 neue Länder und deren Kraftstoffpreise hinzugefügt.]]></de>
+<fr><![CDATA[Ce script ajoute un menu permettant de modifier le prix du diesel en fonction de pays réels. Plus de 35 pays répartis en catégories. 
+Utilisation : Allez dans les paramètres du jeu, trouvez "Realistic Diesel Price", choisissez une région puis un pays. Les modifications s'appliquent immédiatement.
+L'achat en cuve est plus cher qu'en station. Compatible multijoueur. 
+
+Pays disponibles et prix :
 
 Europe :
-- Pologne PLN : 6.65
-- Pologne Euro : 1.55
+- Pologne : 1.67
+- Pologne Hard : 7.25
 - Lituanie : 1.79
 - Lettonie : 1.72
 - Estonie : 1.66
@@ -169,20 +168,20 @@ Asie :
 - Chine : 0.98
 - Japon : 0.86
 
-Changelog: 2.1.0.0:
-- Ajout d'un menu de sélection dynamique en deux étapes (Région -> Pays).
-- Ajout de 33 nouveaux pays et de leurs prix de carburant.
-- Mise à jour de tous les prix du carburant au 06.07.2026.]]></fr>
-
-        <pl><![CDATA[Skrypt dodaje zaawansowane menu pozwalające na zmianę ceny diesla w oparciu o prawdziwe kraje. Ponad 35 państw w kategoriach. 
-Jak używać: Przejdź do ustawień gry, znajdź "Realistic Diesel Price", wybierz region geograficzny, a następnie kraj. Zmiany wprowadzane są natychmiast. Zakup paliwa w stacjonarnym zbiorniku jest droższy niż na stacji. Obsługuje tryb wieloosobowy. 
 Github: https://github.com/KryskiPL/FS25_RealisticDieselPrice 
 
-Dostępne kraje i ceny (Euro/L):
+Changelog: 2.1.0.0:
+- Ajout d'un menu de sélection de région.
+- Ajout de 33 nouveaux pays et de leurs prix de carburant.]]></fr>
+<pl><![CDATA[Skrypt dodaje menu pozwalające na zmianę ceny diesla w oparciu o prawdziwe kraje. Ponad 35 państw w kategoriach. 
+Jak używać: Przejdź do ustawień gry, znajdź "Realistic Diesel Price", wybierz region, a następnie kraj. Zmiany wprowadzane są natychmiast.
+Zakup paliwa w stacjonarnym zbiorniku jest droższy niż na stacji. Obsługuje tryb wieloosobowy. 
+
+Dostępne kraje i ceny:
 
 Europa:
-- Polska PLN: 6.65
-- Polska Euro: 1.55
+- Polska: 1.67
+- Polska Hard: 7.25
 - Litwa: 1.79
 - Łotwa: 1.72
 - Estonia: 1.66
@@ -223,64 +222,11 @@ Azja:
 - Chiny: 0.98
 - Japonia: 0.86
 
-Changelog: 2.1.0.0:
-- Dodano dynamiczne, dwustopniowe menu wyboru (Wybór regionu -> Wybór państwa).
-- Dodano 33 nowe państwa i ich ceny paliw.
-- Aktualizacja wszystkich cen paliw na dzień 06.07.2026 r.]]></pl>
-
-        <es><![CDATA[Este script añade un menú para cambiar el precio del diésel basándose en países reales. Más de 35 países en categorías. 
-Uso: Ve a la configuración del juego, busca "Realistic Diesel Price", elige una región y luego un país. Los cambios se aplican de inmediato. El combustible en tanque instalable es más caro que en gasolinera. Soporta multijugador. 
 Github: https://github.com/KryskiPL/FS25_RealisticDieselPrice 
 
-Países disponibles y precios (Euro/L):
-
-Europa:
-- Polonia PLN: 6.65
-- Polonia Euro: 1.55
-- Lituania: 1.79
-- Letonia: 1.72
-- Estonia: 1.66
-- Chequia: 1.53
-- Austria: 1.80
-- Croacia: 1.55
-- Eslovaquia: 1.55
-- Hungría: 1.79
-- Rumania: 1.82
-- Alemania: 1.90
-- Reino Unido: 1.96
-- Irlanda: 1.85
-- Países Bajos: 2.15
-- Bélgica: 1.95
-- Francia: 1.95
-- Italia: 2.00
-- España: 1.57
-- Suiza: 2.25
-- Portugal: 1.90
-- Dinamarca: 2.07
-- Noruega: 1.61
-- Suecia: 1.65
-- Finlandia: 2.20
-- Bielorrusia: 0.80
-- Ucrania: 1.53
-
-América y Australia:
-- Brasil: 1.14
-- Argentina: 1.30
-- USA: 1.08
-- Canadá: 1.16
-- Australia: 1.09
-
-Asia:
-- Rusia: 0.90
-- Kazajistán: 0.62
-- Mongolia: 1.52
-- China: 0.98
-- Japón: 0.86
-
 Changelog: 2.1.0.0:
-- Añadido un menú de selección dinámico de dos pasos (Región -> País).
-- Añadidos 33 nuevos países y sus precios de combustible.
-- Precios de combustible actualizados a fecha de 06.07.2026.]]></es>
+- Dodano menu wyboru regionu.
+- Dodano 33 nowe państwa i ich ceny paliw.]]></pl>
     </description>
 
     <multiplayer supported="true"/>
