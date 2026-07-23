@@ -13,8 +13,8 @@ rdp.regions = {
     {
         name = "Europe",
         countries = {
-            {label = "Poland", price = 1.67},
-            {label = "Poland Hard", price = 7.25},
+            {label = "Poland", price = 1,76},
+            {label = "Poland Hard", price = 7.60},
             {label = "Lithuania", price = 1.79},
             {label = "Latvia", price = 1.72},
             {label = "Estonia", price = 1.66},
