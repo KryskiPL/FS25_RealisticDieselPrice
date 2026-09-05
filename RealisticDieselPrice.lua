@@ -1,20 +1,22 @@
 --[[ RealisticDieselPrice.lua
 
 Author:     KryskiPL (https://github.com/KryskiPL)
-Version:    v2.1.2.0
+Version:    v2.2.0.0
 
 ]]--
 RealisticDieselPrice = {}
 local rdp = RealisticDieselPrice
+
 rdp.modDirectory = g_currentModDirectory or ""
 rdp.settingsDirectory = (g_modSettingsDirectory or (getUserProfileAppPath() .. "modSettings")) .. "/FS25_RealisticDieselPrice/"
 rdp.settingsFile = rdp.settingsDirectory .. "settings.xml"
+
 rdp.regions = {
     {
         name = "Europe",
         countries = {
-            {label = "Poland", price = 1,76},
-            {label = "Poland Hard", price = 7.60},
+            {label = "Poland", price = 1.81},
+            {label = "Poland Hard", price = 7.85},
             {label = "Lithuania", price = 1.79},
             {label = "Latvia", price = 1.72},
             {label = "Estonia", price = 1.66},
@@ -34,6 +36,7 @@ rdp.regions = {
             {label = "Spain", price = 1.57},
             {label = "Switzerland", price = 2.25},
             {label = "Portugal", price = 1.90},
+            {label = "Greece", price = 1.95},
             {label = "Denmark", price = 2.07},
             {label = "Norway", price = 1.61},
             {label = "Sweden", price = 1.65},
@@ -63,10 +66,26 @@ rdp.regions = {
         }
     }
 }
+
 rdp.currentRegion = 1
 rdp.currentCountry = 1
+rdp.customMode = false
+rdp.customPrice = 1.50
 rdp.menuInstalled = false
 rdp.menuControls = {}
+
+local function getCurrencyData()
+    local factor = 1.0
+    local symbol = "€"
+    if g_i18n ~= nil and g_i18n.getCurrencyFactor ~= nil and g_i18n.getCurrencySymbol ~= nil then
+        symbol = string.gsub(g_i18n:getCurrencySymbol(true), "^%s*(.-)%s*$", "%1")
+        if (symbol == "$" or symbol == "£") and g_i18n:getCurrencyFactor() > 0 then
+            factor = g_i18n:getCurrencyFactor()
+        end
+    end
+    return factor, symbol
+end
+
 local function loadSettings()
     createFolder(rdp.settingsDirectory)
     if not fileExists(rdp.settingsFile) then return end
@@ -74,14 +93,16 @@ local function loadSettings()
     if xmlFile == nil then return end
     local savedRegion = xmlFile:getInt("settings#regionState")
     local savedCountry = xmlFile:getInt("settings#countryState")
-    if savedRegion ~= nil and rdp.regions[savedRegion] ~= nil then
-        rdp.currentRegion = savedRegion
-    end
+    local savedCustomMode = xmlFile:getBool("settings#customMode")
+    local savedCustomPrice = xmlFile:getFloat("settings#customPrice")
+    if savedRegion ~= nil and rdp.regions[savedRegion] ~= nil then rdp.currentRegion = savedRegion end
     if savedCountry ~= nil and rdp.regions[rdp.currentRegion].countries[savedCountry] ~= nil then
         rdp.currentCountry = savedCountry
     else
         rdp.currentCountry = 1
     end
+    if savedCustomMode ~= nil then rdp.customMode = savedCustomMode end
+    if savedCustomPrice ~= nil then rdp.customPrice = savedCustomPrice end
     xmlFile:delete()
 end
 
@@ -91,19 +112,29 @@ local function saveSettings()
     if xmlFile == nil then return end
     xmlFile:setInt("settings#regionState", rdp.currentRegion)
     xmlFile:setInt("settings#countryState", rdp.currentCountry)
+    xmlFile:setBool("settings#customMode", rdp.customMode)
+    xmlFile:setFloat("settings#customPrice", rdp.customPrice)
     xmlFile:save()
     xmlFile:delete()
 end
 
 function rdp.applyCurrentPrice()
-    local regionData = rdp.regions[rdp.currentRegion]
-    if regionData == nil then return end
-    local countryData = regionData.countries[rdp.currentCountry]
-    if countryData == nil then return end
+    local price = 1.0
+    if rdp.customMode then
+        price = rdp.customPrice
+    else
+        local regionData = rdp.regions[rdp.currentRegion]
+        if regionData ~= nil then
+            local countryData = regionData.countries[rdp.currentCountry]
+            if countryData ~= nil then
+                price = countryData.price
+            end
+        end
+    end
     if g_fillTypeManager ~= nil then
         local dieselType = g_fillTypeManager:getFillTypeByName("DIESEL")
         if dieselType ~= nil then
-            dieselType.pricePerLiter = countryData.price
+            dieselType.pricePerLiter = price
         end
     end
 end
@@ -118,6 +149,15 @@ local function assignFocusIds(element)
     end
 end
 
+local function getCustomPriceTexts()
+    local texts = {}
+    local factor, symbol = getCurrencyData()
+    for i = 1, 5000 do
+        texts[i] = string.format("%.2f %s", i * 0.01, symbol)
+    end
+    return texts
+end
+
 local function getRegionTexts()
     local texts = {}
     for index, region in ipairs(rdp.regions) do
@@ -130,18 +170,9 @@ local function getCountryTexts(regionIndex)
     local texts = {}
     local region = rdp.regions[regionIndex]
     if region ~= nil then
+        local factor, symbol = getCurrencyData()
         for index, country in ipairs(region.countries) do
-            local convertedPrice = country.price
-            local symbol = "€"
-            if g_i18n ~= nil and g_i18n.getCurrencyFactor ~= nil and g_i18n.getCurrencySymbol ~= nil then
-                symbol = g_i18n:getCurrencySymbol(true)
-                symbol = string.gsub(symbol, "^%s*(.-)%s*$", "%1")
-                if symbol == "$" or symbol == "£" then
-                    convertedPrice = country.price * g_i18n:getCurrencyFactor()
-                else
-                    convertedPrice = country.price
-                end
-            end
+            local convertedPrice = country.price * factor
             texts[index] = string.format("%s (%.2f %s/L)", country.label, convertedPrice, symbol)
         end
     end
@@ -151,43 +182,56 @@ end
 local function addMenuOptions(settingsPage, settingsLayout)
     local multiTemplate = settingsPage.multiVolumeVoiceBox or settingsPage.soundVolumeEnvironmentBox
     if multiTemplate == nil or multiTemplate.clone == nil then return false end
+    
+    local customModeBox = multiTemplate:clone(settingsLayout)
+    customModeBox.id = "rdpCustomModeBox"
+    local customModeOption = customModeBox.elements[1]
+    customModeOption.id = "rdpCustomModeOption"
+    customModeOption.target = rdp
+    customModeOption:setCallback("onClickCallback", "onCustomModeChanged")
+    local textOff = g_i18n:getText("ui_off") or "OFF"
+    local textOn = g_i18n:getText("ui_on") or "ON"
+    customModeOption:setTexts({textOff, textOn})
+    local customModeLabel = customModeBox.elements[2]
+    if customModeLabel ~= nil then customModeLabel:setText("Custom Fuel Price") end
+    assignFocusIds(customModeBox)
+    table.insert(settingsPage.controlsList, customModeBox)
+    rdp.menuControls.customModeSelection = customModeOption
+
+    local customPriceBox = multiTemplate:clone(settingsLayout)
+    customPriceBox.id = "rdpCustomPriceBox"
+    local customPriceOption = customPriceBox.elements[1]
+    customPriceOption.id = "rdpCustomPriceOption"
+    customPriceOption.target = rdp
+    customPriceOption:setCallback("onClickCallback", "onCustomPriceChanged")
+    customPriceOption:setTexts(getCustomPriceTexts())
+    local customPriceLabel = customPriceBox.elements[2]
+    if customPriceLabel ~= nil then customPriceLabel:setText("Set Custom Price") end
+    assignFocusIds(customPriceBox)
+    table.insert(settingsPage.controlsList, customPriceBox)
+    rdp.menuControls.customPriceSelection = customPriceOption
+
     local regionBox = multiTemplate:clone(settingsLayout)
     regionBox.id = "rdpRegionSelectionBox"
     local regionOption = regionBox.elements[1]
     regionOption.id = "rdpRegionSelection"
     regionOption.target = rdp
     regionOption:setCallback("onClickCallback", "onRegionChanged")
-    regionOption:setDisabled(false)
     regionOption:setTexts(getRegionTexts())
-    regionOption:setState(rdp.currentRegion)
-    local regionTooltip = regionOption.elements[1]
-    if regionTooltip ~= nil then
-        regionTooltip:setText("First, select the geographic region or continent.")
-    end
     local regionLabel = regionBox.elements[2]
-    if regionLabel ~= nil then
-        regionLabel:setText("Diesel Region")
-    end
+    if regionLabel ~= nil then regionLabel:setText("Diesel Region") end
     assignFocusIds(regionBox)
     table.insert(settingsPage.controlsList, regionBox)
     rdp.menuControls.regionSelection = regionOption
+    
     local countryBox = multiTemplate:clone(settingsLayout)
     countryBox.id = "rdpCountrySelectionBox"
     local countryOption = countryBox.elements[1]
     countryOption.id = "rdpCountrySelection"
     countryOption.target = rdp
     countryOption:setCallback("onClickCallback", "onCountryChanged")
-    countryOption:setDisabled(false)
-    countryOption:setTexts(getCountryTexts(rdp.currentRegion))
-    countryOption:setState(rdp.currentCountry)
-    local countryTooltip = countryOption.elements[1]
-    if countryTooltip ~= nil then
-        countryTooltip:setText("Now, choose the specific country for fuel pricing. Changes apply immediately.")
-    end
     local countryLabel = countryBox.elements[2]
-    if countryLabel ~= nil then
-        countryLabel:setText("Diesel Country")
-    end
+    if countryLabel ~= nil then countryLabel:setText("Diesel Country") end
     assignFocusIds(countryBox)
     table.insert(settingsPage.controlsList, countryBox)
     rdp.menuControls.countrySelection = countryOption
@@ -195,16 +239,28 @@ local function addMenuOptions(settingsPage, settingsLayout)
     return true
 end
 
+function rdp:onCustomModeChanged(state)
+    rdp.customMode = (state == 2)
+    saveSettings()
+    rdp.applyCurrentPrice()
+    rdp.refreshMenuStates()
+end
+
+function rdp:onCustomPriceChanged(state)
+    local factor, symbol = getCurrencyData()
+    local localPrice = state * 0.01
+    rdp.customPrice = localPrice / factor
+    saveSettings()
+    rdp.applyCurrentPrice()
+end
+
 function rdp:onRegionChanged(state)
     if rdp.regions[state] == nil then return end
     rdp.currentRegion = state
     rdp.currentCountry = 1
-    if rdp.menuControls.countrySelection ~= nil then
-        rdp.menuControls.countrySelection:setTexts(getCountryTexts(rdp.currentRegion))
-        rdp.menuControls.countrySelection:setState(rdp.currentCountry, nil, true)
-    end
     saveSettings()
     rdp.applyCurrentPrice()
+    rdp.refreshMenuStates()
 end
 
 function rdp:onCountryChanged(state)
@@ -215,10 +271,31 @@ function rdp:onCountryChanged(state)
 end
 
 function rdp.refreshMenuStates()
+    local isCustom = rdp.customMode
+    
+    if rdp.menuControls.customModeSelection ~= nil then
+        rdp.menuControls.customModeSelection:setState(isCustom and 2 or 1, nil, true)
+    end
+    
+    if rdp.menuControls.customPriceSelection ~= nil then
+        local factor, symbol = getCurrencyData()
+        local localPrice = rdp.customPrice * factor
+        local state = math.floor((localPrice / 0.01) + 0.5)
+        if state < 1 then state = 1 end
+        if state > 5000 then state = 5000 end
+        
+        rdp.menuControls.customPriceSelection:setDisabled(not isCustom)
+        rdp.menuControls.customPriceSelection:setTexts(getCustomPriceTexts())
+        rdp.menuControls.customPriceSelection:setState(state, nil, true)
+    end
+    
     if rdp.menuControls.regionSelection ~= nil then
+        rdp.menuControls.regionSelection:setDisabled(isCustom)
         rdp.menuControls.regionSelection:setState(rdp.currentRegion, nil, true)
     end
+    
     if rdp.menuControls.countrySelection ~= nil then
+        rdp.menuControls.countrySelection:setDisabled(isCustom)
         rdp.menuControls.countrySelection:setTexts(getCountryTexts(rdp.currentRegion))
         rdp.menuControls.countrySelection:setState(rdp.currentCountry, nil, true)
     end
